@@ -1,0 +1,63 @@
+﻿@if (ShowSuccessModal)
+{
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-body text-center p-5">
+                    <div class="mb-3">
+                        <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">Message Sent!</h5>
+                    <p class="text-muted mb-4">Your message has been sent successfully!</p>
+                    <a href="/contact" class="btn btn-small btn-round-edge btn-dark-gray btn-box-shadow">
+                        Close
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<EditForm id="contact-form" Model="FormInput" OnValidSubmit="Submit" FormName="ContactForm" >
+
+    <DataAnnotationsValidator />
+    <div class="position-relative form-group mb-20px">
+        <span class="form-icon"><i class="bi bi-person icon-extra-medium"></i></span>
+        <InputText class="ps-0 border-radius-0px bg-transparent form-control placeholder-medium-gray border-color-extra-medium-gray required"
+               @bind-Value="FormInput.Name" type="text" name="name" placeholder="Enter your name*"/>
+    </div>
+    <div class="position-relative form-group mb-20px">
+        <span class="form-icon"><i class="bi bi-envelope icon-extra-medium"></i></span>
+        <InputText class="ps-0 border-radius-0px bg-transparent form-control placeholder-medium-gray border-color-extra-medium-gray required"
+               @bind-Value="FormInput.Email" type="email" name="email" placeholder="Enter your email address*"/>
+    </div>
+    <div class="position-relative form-group form-textarea mt-15px mb-25px">
+        <InputTextArea class="ps-0 border-radius-0px bg-transparent form-control placeholder-medium-gray border-color-extra-medium-gray"
+                  name="comment" placeholder="Enter your message" rows="4" @bind-Value="FormInput.Message" ></InputTextArea>
+        <span class="form-icon"><i class="bi bi-chat-square-text icon-extra-medium"></i></span>
+        <input type="hidden" name="redirect" value="">
+
+        <button class="btn btn-medium btn-dark-gray mt-30px submit w-100 btn-rounded right-icon btn-box-shadow left-icon"
+                type="submit" disabled="@IsSubmitting" @onclick="Submit">
+            <i class="feather icon-feather-mail"></i>
+                @(IsSubmitting ? "Sending..." : "Send Message")
+        </button>
+        <div class="form-results mt-20px d-none"></div>
+    </div>
+
+    <div class="col-6 mb-3">
+        <div id="recaptcha-container"></div>
+        @if (CaptchaError)
+        {
+            <span class="text-danger fs-13 d-block mt-1">Please complete the CAPTCHA to continue.</span>
+        }
+    </div>
+
+    <span class="fs-14 lh-22 fw-500 d-block">
+        I accept the terms & conditions and i understand that my data
+        will be hold securely in accordance with the <a href="#" class="text-dark-gray">
+        privacy
+        policy.
+    </a>
+</span>
+</EditForm>

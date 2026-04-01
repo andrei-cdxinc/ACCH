@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+            body {
+                font-family: 'Segoe UI', Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f7f9;
+            }
+
+            .container {
+                max-width: 700px;
+                margin: 20px auto;
+                background-color: #ffffff;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .header {
+                background-color: #4E0E6E;
+                padding: 30px;
+                text-align: center;
+            }
+
+                .header h1 {
+                    color: #ffffff;
+                    margin: 0;
+                    font-size: 28px;
+                    letter-spacing: 1px;
+                }
+
+            .accent-bar {
+                height: 4px;
+                background: linear-gradient(90deg, #b432b2, #df40dd);
+            }
+
+            .content {
+                padding: 40px 30px;
+                color: #333333;
+                line-height: 1.6;
+            }
+
+                .content h2 {
+                    color: #1a2b3c;
+                    font-size: 18px;
+                    margin-top: 0;
+                    border-bottom: 1px solid #eeeeee;
+                    padding-bottom: 10px;
+                }
+
+            .field-group {
+                margin-bottom: 20px;
+            }
+
+            .label {
+                font-weight: bold;
+                color: #1a2b3c;
+                font-size: 12px;
+                text-transform: uppercase;
+                display: block;
+                margin-bottom: 4px;
+            }
+
+            .value {
+                background-color: #f9f9f9;
+                padding: 12px;
+                border-radius: 4px;
+                border-left: 4.5px solid #4E0E6E;
+            }
+
+            .footer {
+                background-color: #f4f7f9;
+                padding: 20px;
+                text-align: center;
+                color: #777777;
+                font-size: 12px;
+            }
+
+            .btn {
+                display: inline-block;
+                padding: 12px 30px;
+                background-color: #4E0E6E;
+                color: #ffffff;
+                text-decoration: none;
+                border-radius: 12px;
+                font-weight: bold;
+                margin-top: 20px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            @* <img src="/images/logo/logo-ic-light.png"> *@
+            <h1>All Compassionate Care</h1>
+        </div>
+        <div class="accent-bar"></div>
+        <div class="content">
+            <h2>New Contact Form Submission</h2>
+            <p>You have received a new message from the website contact form. Details are provided below:</p>
+            <div class="field-group">
+                <span class="label">Sender Name</span>
+                <div class="value">@Name</div>
+            </div>
+            <div class="field-group">
+                <span class="label">Email Address</span>
+                <div class="value">@Email</div>
+            </div>
+            <div class="field-group">
+                <span class="label">Message</span>
+                <div class="value">@Message</div>
+            </div>
+            <a href="mailto:@Email" class="btn" style="color: #ffffff">Reply to Inquiry</a>
+        </div>
+        <div class="footer">
+            <p>&copy; @DateTime.Now.Year All Compassionate Care | Compliance-Driven Support</p>
+            <p>This is an automated notification from your website All Compassionate Care.</p>
+        </div>
+    </div>
+</body>
+</html>
+
+@code {
+    [Parameter] public string Name { get; set; } = string.Empty;
+    [Parameter] public string Email { get; set; } = string.Empty;
+    [Parameter] public string Message { get; set; } = string.Empty;
+}

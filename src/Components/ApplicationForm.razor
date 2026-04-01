@@ -1,0 +1,362 @@
+﻿@if (ShowSuccessModal)
+{
+	<div class="modal fade show d-block" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content border-0 shadow-lg rounded-4">
+				<div class="modal-body text-center p-5">
+					<div class="mb-3">
+						<i class="bi bi-check-circle-fill text-success" style="font-size: 3rem;"></i>
+					</div>
+					<h5 class="fw-bold mb-2">Message Sent!</h5>
+					<p class="text-muted mb-4">Your message has been sent successfully!</p>
+					<a href="/careers" class="btn btn-small btn-round-edge btn-dark-gray btn-box-shadow">
+						Close
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+<!-- start section -->
+<section id="down-section" class="bg-gradient-blue-transparent-first">
+	<div class="container ">
+		<div class="row justify-content-center">
+			<div class="col-lg-10">
+				<div class="p-5 bg-white  box-shadow-quadruple-large">
+
+					<EditForm class="contact-form-style-03" enctype="multipart/form-data" EditContext="_editContext" OnValidSubmit="Submit" OnInvalidSubmit="HandleInvalidSubmit" FormName="ApplicationForm">
+						
+						<DataAnnotationsValidator />
+						@* <ValidationSummary class="alert alert-danger" /> *@
+
+						<div class="row justify-content-center">
+							<div class="col-12">
+								<h4 class="fs-24 text-dark-gray fw-700 m-0" id="applying-for-heading">Applying For: @SelectedPosition</h4>
+							</div>
+							<hr class="my-4">
+							<div class="col-12">
+								<h4 class="fw-bold fs-20 text-dark-gray m-0">Contact Information</h4>
+							</div>
+
+							<div class="col-md-6">
+								<label for="exampleInputEmail1" class="form-label fs-12 ls-1px text-uppercase fw-bold mb-0">First Name <span class="text-red">*</span></label>
+								<div class="position-relative form-group mb-30px">
+									<span class="form-icon me-15px"><i class="bi"></i></span>
+									<InputText class="fs-15 p-10px border border-2 border-radius-5px border-color-charcoal-grey bg-transparent form-control required" id="exampleInputEmail1" name="First Name"
+											   placeholder="" @bind-Value="FormInput.FirstName" />
+									<ValidationMessage For="@(() => FormInput.FirstName)" class="d-block text-danger fs-13" />
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<label for="exampleInputEmail1" class="form-label fs-12 ls-1px text-uppercase fw-bold mb-0">Last Name <span class="text-red">*</span></label>
+								<div class="position-relative form-group mb-30px">
+									<span class="form-icon me-15px"><i class="bi"></i></span>
+									<InputText class="fs-15 p-10px border border-2 border-radius-5px border-color-charcoal-grey bg-transparent form-control required" id="exampleInputEmail1" name="Last Name"
+											   placeholder="" required @bind-Value="FormInput.LastName" />
+									<ValidationMessage For="@(() => FormInput.LastName)" class="d-block text-danger fs-13" />
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<label for="exampleInputEmail1" class="form-label fs-12 ls-1px text-uppercase fw-bold mb-0">Date of Birth <span class="text-red">*</span></label>
+								<div class="position-relative form-group mb-30px">
+									<span class="form-icon me-15px"><i class="bi"></i></span>
+									<InputDate class="fs-15 p-10px border border-2 border-radius-5px border-color-charcoal-grey bg-transparent form-control required"
+											   id="exampleInputEmail1"
+											   name="dateofbirth"
+											   min="@MinDateOfBirth"
+											   max="@MaxDateOfBirth"
+											   placeholder=""
+											   @bind-Value="FormInput.DateOfBirth" />
+									<ValidationMessage For="@(() => FormInput.DateOfBirth)" class="d-block text-danger fs-13" />
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<label for="exampleInputEmail1" class="form-label fs-12 ls-1px text-uppercase fw-bold mb-0">Email <span class="text-red">*</span></label>
+								<div class="position-relative form-group mb-30px">
+									@* <span class="form-icon me-15px"><i class="bi bi-envelope"></i></span> *@
+									<InputText class="fs-15 p-10px border border-2 border-radius-5px border-color-charcoal-grey bg-transparent form-control required" id="exampleInputEmail3" name="email"
+											   placeholder="eg. johndoe@gmail.com" @bind-Value="FormInput.Email" />
+									<ValidationMessage For="@(() => FormInput.Email)" class="d-block text-danger fs-13" />
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<label for="phoneInput" class="form-label fs-12 ls-1px text-uppercase fw-bold mb-0">Phone Number <span class="text-red">*</span></label>
+								<div class="position-relative form-group mb-30px">
+									@* <span class="form-icon me-15px"><i class="bi bi-telephone"></i></span> *@
+									<InputText class="fs-15 p-10px border border-2 border-radius-5px border-color-charcoal-grey bg-transparent form-control required" id="phoneInput" type="tel" name="phone"
+											   placeholder="eg. (123) 456 7891" @bind-Value="FormInput.PhoneNumber" />
+									<div id="phoneValidationFeedback" class="fs-12"> </div>
+									<ValidationMessage For="@(() => FormInput.PhoneNumber)" class="d-block text-danger fs-13" />
+								</div>
+							</div>
+
+							<div class="col-12">
+								<label for="exampleInputEmail1" class="form-label fs-12 ls-1px text-uppercase fw-bold mb-0">Address <span class="text-red">*</span></label>
+								<div class="position-relative form-group mb-30px">
+									@* <span class="form-icon me-15px"><i class="bi bi-map"></i></span> *@
+									<InputText class="fs-15 p-10px border border-2 border-radius-5px border-color-charcoal-grey bg-transparent form-control required" id="exampleInputEmail1" type="text" name="address"
+											   placeholder="" @bind-Value="FormInput.Address" />
+									<ValidationMessage For="@(() => FormInput.Address)" class="d-block text-danger fs-13" />
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<label for="exampleInputEmail1" class="form-label fs-12 ls-1px text-uppercase fw-bold mb-0">City <span class="text-red">*</span></label>
+								<div class="position-relative form-group mb-30px">
+									<span class="form-icon me-15px"><i class="bi"></i></span>
+									<InputText class="fs-15 p-10px border border-2 border-radius-5px border-color-charcoal-grey bg-transparent form-control required" id="exampleInputEmail1" type="text" name="city"
+											   placeholder="" @bind-Value="FormInput.City" />
+									<ValidationMessage For="@(() => FormInput.City)" class="d-block text-danger fs-13" />
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<label for="exampleInputEmail1" class="form-label fs-12 ls-1px text-uppercase fw-bold mb-0">State <span class="text-red">*</span></label>
+								<div class="position-relative form-group mb-30px">
+									<span class="form-icon me-15px"><i class="bi"></i></span>
+									<InputText class="fs-15 p-10px border border-2 border-radius-5px border-color-charcoal-grey bg-transparent form-control required" id="exampleInputEmail1" type="text" name="state"
+											   placeholder="eg. TX" @bind-Value="FormInput.State" />
+									<ValidationMessage For="@(() => FormInput.State)" class="d-block text-danger fs-13" />
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<label for="zipCodeInput" class="form-label fs-12 ls-1px text-uppercase fw-bold mb-0">Zip Code <span class="text-red">*</span></label>
+								<div class="position-relative form-group mb-30px">
+									<span class="form-icon me-15px"><i class="bi"></i></span>
+									<InputText class="fs-15 p-10px border border-2 border-radius-5px border-color-charcoal-grey bg-transparent form-control required" id="zipCodeInput" type="text" name="zipcode"
+											   placeholder="eg. 75001" @bind-Value="FormInput.ZipCode" />
+									<div id="zipValidationFeedback" class="fs-12"></div>
+									<ValidationMessage For="@(() => FormInput.ZipCode)" class="d-block text-danger fs-13" />
+								</div>
+							</div>
+
+
+							<hr class="mt-3 mb-5">
+							<div class="col-12">
+								<h4 class="fw-bold fs-20 m-0 text-dark-gray">Job Application</h4>
+							</div>
+
+							<div class="col-12">
+								<label for="exampleInputEmail1" class="form-label fs-12 ls-1px text-uppercase fw-bold mb-0">Position Desired</label>
+								<div class="position-relative form-group mb-30px">
+									<span class="form-icon me-15px"><i class="bi"></i></span>
+									<InputText class="fs-15 p-10px border border-2 border-radius-5px border-color-charcoal-grey bg-transparent form-control required"
+											   id="position-desired-input"
+											   type="text"
+											   name="Position Desired"
+											   disabled="@IsPositionDisabled"
+											   @bind-Value="FormInput.PositionDesired"
+											   placeholder="" />
+								</div>
+							</div>
+
+							<div class="col-12 mb-2">
+								<label for="exampleInputEmail1" class="form-label fs-12 ls-1px text-uppercase fw-bold mb-0">Upload Resume <span class="text-red">*</span></label>
+								<div class="input-group border border-2 rounded-1">
+									<input type="file" name="resume" class="form-control form-control-primary border-0 ps-15px pe-15px pt-10px pb-10px" id="resumeUpload" accept=".pdf,.doc,.docx">
+								</div>
+								<span class="fs-12 text-medium-gray mt-5px">Accepted formats: PDF, DOC, DOCX</span>
+								@if (!string.IsNullOrWhiteSpace(ResumeValidationMessage))
+								{
+									<div class="text-danger fs-13">@ResumeValidationMessage</div>
+								}
+							</div>
+
+							<div class="col-12 mb-5">
+								<label for="exampleInputEmail1" class="form-label fs-12 ls-1px text-uppercase fw-bold mb-0">Comment</label>
+								<div class="position-relative form-group form-textarea mb-0">
+									<InputTextArea class="fs-15 p-10px border border-2 border-radius-5px border-color-charcoal-grey bg-transparent form-control" name="comment" placeholder="Please describe your care needs or questions"
+												   rows="4" @bind-Value="FormInput.Comments" />
+									<span class="form-icon me-15px"><i class="bi bi-chat-square-dots"></i></span>
+								</div>
+							</div>
+
+							<div class="col-12 d-flex flex-column">
+
+								<ValidationMessage For="@(() => FormInput.Consent)" class="d-block text-danger fs-13" />
+								<div class="col-xl-7 col-md-8 text-center text-md-start sm-mb-25px d-flex align-items-start mb-3">
+									
+									<InputCheckbox @bind-Value="FormInput.Consent"
+												   class="me-2 flex-shrink-0 mt-1"
+												   style="width:auto; margin:0;" />
+									<p class="mb-0 fs-14 lh-24">
+										We are committed to protecting your privacy. We will never collect information about you without your explicit consent.
+									</p>
+								</div>
+								
+
+								<div class="col-12 d-flex flex-column flex-md-row align-items-center justify-content-between mb-1">
+									<div id="recaptcha-container"></div>
+
+									<div class="mt-3 mt-md-0 text-center text-md-end">
+										<input id="exampleInputEmail5" type="hidden" name="redirect" value="">
+										<button type="submit" class="btn btn-small btn-dark-gray btn-box-shadow btn-round-edge-small fw-700 submit rounded-pill"
+												disabled="@IsSubmitting"
+												onclick="@Submit">
+											@(IsSubmitting ? "Sending..." : "Submit Application")
+										</button>
+
+										@if (!string.IsNullOrWhiteSpace(StatusMessage) && !IsSuccess)
+										{
+											<div class="alert alert-danger mt-3 mb-0" role="alert">
+												@StatusMessage
+											</div>
+										}
+									</div>
+								</div>
+								@if (CaptchaError)
+								{
+									<span class="text-danger fs-13">
+										Please complete the CAPTCHA to continue.
+									</span>
+								}
+							</div>
+
+							<div class="col-12">
+								<div class="form-results mt-20px d-none"></div>
+							</div>
+
+						</div>
+					</EditForm>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end section -->
+
+<script type="text/javascript" src="/js/file-upload.js"></script>
+
+<script>
+
+	window.applyPhoneMask = (elementId) => {
+	const input = document.getElementById(elementId);
+	const feedbackDiv = document.getElementById('phoneValidationFeedback');
+	if (!input) return;
+	input.addEventListener('input', (e) => {
+	// Strip everything except numbers
+	let numbers = e.target.value.replace(/\D/g, '');
+	// Truncate to 10 digits
+	if (numbers.length > 10) numbers = numbers.substring(0, 10);
+	// Apply US Mask: (XXX) XXX-XXXX
+	let formatted = '';
+	if (numbers.length > 0) {
+	formatted = '(' + numbers.substring(0, 3);
+	if (numbers.length > 3) {
+	formatted += ') ' + numbers.substring(3, 6);
+	}
+	if (numbers.length > 6) {
+	formatted += '-' + numbers.substring(6, 10);
+	}
+	}
+	e.target.value = formatted;
+	// Real-time validation feedback
+	validatePhoneNumber(numbers, feedbackDiv, input);
+	// Manually trigger the Blazor binding update
+	input.dispatchEvent(new Event('change'));
+	});
+	};
+
+	// Phone validation function with real-time feedback
+	window.validatePhoneNumber = (digitsOnly, feedbackDiv, input) => {
+	if (!feedbackDiv || !input) return;
+	const number = digitsOnly.trim();
+	// Empty field
+	if (number.length === 0) {
+	feedbackDiv.innerHTML = '';
+	input.classList.remove('is-invalid', 'is-valid');
+	return;
+	}
+	// Not enough digits yet
+	if (number.length < 10) {
+	feedbackDiv.innerHTML = `<span class="text-warning">${number.length}/10 digits</span>`;
+	input.classList.remove('is-valid');
+	input.classList.add('is-invalid');
+	return;
+	}
+	// Check for invalid area codes (starting with 0 or 1)
+	if (number[0] === '0' || number[0] === '1') {
+	feedbackDiv.innerHTML = '<span class="text-danger">Invalid area code. Cannot start with 0 or 1</span>';
+	input.classList.remove('is-valid');
+	input.classList.add('is-invalid');
+	return;
+	}
+	// Valid phone number
+	if (number.length === 10) {
+	feedbackDiv.innerHTML = '<span class="text-success">Valid phone number</span>';
+	input.classList.remove('is-invalid');
+	input.classList.add('is-valid');
+	return;
+	}
+	// More than 10 digits (shouldn't happen with our logic, but just in case)
+	feedbackDiv.innerHTML = '<span class="text-danger">Too many digits</span>';
+	input.classList.remove('is-valid');
+	input.classList.add('is-invalid');
+	};
+
+	window.applyZipCodeMask = (elementId) => {
+	const input = document.getElementById(elementId);
+	const feedbackDiv = document.getElementById('zipValidationFeedback');
+	if (!input) return;
+	input.addEventListener('input', (e) => {
+	// Numbers only
+	let numbers = e.target.value.replace(/\D/g, '');
+	// Truncate to 9 digits
+	if (numbers.length > 9) numbers = numbers.substring(0, 9);
+	// Apply ZIP mask: 12345 or 12345-6789
+	let formatted = numbers;
+	if (numbers.length > 5) {
+	formatted = numbers.substring(0, 5) + '-' + numbers.substring(5, 9);
+	}
+	e.target.value = formatted;
+	// Real-time validation feedback
+	validateZipCode(numbers, feedbackDiv, input);
+	// Manually trigger the Blazor binding update
+	input.dispatchEvent(new Event('change'));
+	});
+	};
+
+	window.validateZipCode = (digitsOnly, feedbackDiv, input) => {
+	if (!feedbackDiv || !input) return;
+	const zip = digitsOnly.trim();
+	if (zip.length === 0) {
+	feedbackDiv.innerHTML = '';
+	input.classList.remove('is-invalid', 'is-valid');
+	return;
+	}
+	if (zip.length < 5) {
+	feedbackDiv.innerHTML = `<span class="text-warning">${zip.length}/5 digits</span>`;
+	input.classList.remove('is-valid');
+	input.classList.add('is-invalid');
+	return;
+	}
+	if (zip.length === 5) {
+	feedbackDiv.innerHTML = '<span class="text-success">Valid 5-digit ZIP code</span>';
+	input.classList.remove('is-invalid');
+	input.classList.add('is-valid');
+	return;
+	}
+	if (zip.length < 9) {
+	feedbackDiv.innerHTML = `<span class="text-warning">ZIP+4 in progress (${zip.length}/9 digits)</span>`;
+	input.classList.remove('is-valid');
+	input.classList.add('is-invalid');
+	return;
+	}
+	if (zip.length === 9) {
+	feedbackDiv.innerHTML = '<span class="text-success">Valid ZIP+4 code</span>';
+	input.classList.remove('is-invalid');
+	input.classList.add('is-valid');
+	return;
+	}
+	feedbackDiv.innerHTML = '<span class="text-danger">Too many digits</span>';
+	input.classList.remove('is-valid');
+	input.classList.add('is-invalid');
+	};
+
+</script>

@@ -1,0 +1,69 @@
+﻿@* SeoMeta.razor — Inject per-page SEO meta tags into <head> via HeadOutlet *@
+
+<PageTitle>@Title</PageTitle>
+
+<HeadContent>
+    @if (!string.IsNullOrWhiteSpace(Author))
+    {
+        <meta name="author" content="@Author" />
+    }
+    @if (!string.IsNullOrWhiteSpace(Description))
+    {
+        <meta name="description" content="@Description" />
+    }
+    @if (!string.IsNullOrWhiteSpace(Keywords))
+    {
+        <meta name="keywords" content="@Keywords" />
+    }
+
+    @* Open Graph *@
+    <meta property="og:title" content="@(string.IsNullOrWhiteSpace(SocialTitle) ? Title : SocialTitle)" />
+    <meta property="og:description" content="@(string.IsNullOrWhiteSpace(SocialDescription) ? Description : SocialDescription)" />
+    @if (!string.IsNullOrWhiteSpace(SocialImage))
+    {
+        <meta property="og:image" content="@SocialImage" />
+    }
+    @if (!string.IsNullOrWhiteSpace(SocialUrl))
+    {
+        <meta property="og:url" content="@SocialUrl" />
+    }
+    <meta property="og:type" content="@SocialType" />
+
+    @* Twitter Card *@
+    <meta name="twitter:card" content="@TwitterCardType" />
+    <meta name="twitter:title" content="@(string.IsNullOrWhiteSpace(TwitterTitle) ? Title : TwitterTitle)" />
+    <meta name="twitter:description" content="@(string.IsNullOrWhiteSpace(TwitterDescription) ? Description : TwitterDescription)" />
+    @if (!string.IsNullOrWhiteSpace(TwitterImage))
+    {
+        <meta name="twitter:image" content="@TwitterImage" />
+    }
+
+    @* Canonical *@
+    @if (!string.IsNullOrWhiteSpace(Canonical))
+    {
+        <link rel="canonical" href="@Canonical" />
+    }
+</HeadContent>
+
+@code {
+    [Parameter] public string Title { get; set; } = string.Empty;
+    [Parameter] public string Author { get; set; } = string.Empty;
+    [Parameter] public string Description { get; set; } = string.Empty;
+    [Parameter] public string Keywords { get; set; } = string.Empty;
+
+    @* Open Graph *@
+    [Parameter] public string SocialTitle { get; set; } = string.Empty;
+    [Parameter] public string SocialDescription { get; set; } = string.Empty;
+    [Parameter] public string SocialImage { get; set; } = string.Empty;
+    [Parameter] public string SocialUrl { get; set; } = string.Empty;
+    [Parameter] public string SocialType { get; set; } = string.Empty;
+
+    @* Twitter Card *@
+    [Parameter] public string TwitterCardType { get; set; } = string.Empty;
+    [Parameter] public string TwitterTitle { get; set; } = string.Empty;
+    [Parameter] public string TwitterDescription { get; set; } = string.Empty;
+    [Parameter] public string TwitterImage { get; set; } = string.Empty;
+
+    @* Canonical *@
+    [Parameter] public string Canonical { get; set; } = string.Empty;
+}

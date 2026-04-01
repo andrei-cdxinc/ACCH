@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>54dc1f6e-94b1-4a48-9917-ccd6ca33933f</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Properties\PublishProfiles\allcompassionate - FTP.pubxml" />
+    <None Remove="Properties\PublishProfiles\allcompassionate - ReadOnly - FTP.pubxml" />
+    <None Remove="Properties\PublishProfiles\allcompassionate - Zip Deploy.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.15.1" />
+  </ItemGroup>
+
+</Project>

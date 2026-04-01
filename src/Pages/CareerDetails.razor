@@ -1,0 +1,45 @@
+﻿@page "/career-details"
+
+<!-- start page title -->
+<section class="p-0 ipad-top-space-margin page-title-big-typography cover-background md-background-position-left-center"
+		 style="background-image: url(images/demo-elder-care-title-bg.jpg);">
+	<div class="container">
+		<div class="row align-items-end justify-content-center h-200px">
+			<div class="col-auto text-center page-title-double-large"
+				 data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
+				<span class="ps-25px pe-25px mb-20px text-uppercase text-base-color fs-14 lh-42px fw-700 border-radius-100px bg-gradient-very-light-gray-transparent d-inline-block" el="childs" staggervalue="300" easing="easeOutQuad" style="">Career Details</span>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end page title -->
+<!-- start section -->
+<section class="position-relative p-0">
+	<div class="container pt-5 pb-5 lg-pt-5 lg-pb-5 sm-pt-30px sm-pb-30px px-3">
+		<div class="row justify-content-center" data-anime='{ "el": "childs", "opacity": [0,1], "duration": 600, "delay": 100, "staggervalue": 300, "easing": "easeOutQuad" }'>
+			<!-- start sidebar -->
+			<aside class="col-lg-5 pe-60px lg-pe-30px md-pe-15px">
+
+				<a href="/careers" class="btn btn-link underline-on-hover btn-medium text-dark-gray d-table d-lg-inline-block xl-mb-15px md-mx-auto mb-3">
+					<span>
+						<span><i class="fa-solid fa-arrow-left me-10px"></i></span>
+						<span class="fw-700">Back to Jobs</span>
+					</span>
+				</a>
+
+				<div id="job-sidebar"></div>
+			</aside>
+			<!-- end sidebar -->
+
+			<div class="col-lg-7 pt-30px">
+				<!-- Job content will be dynamically rendered here -->
+				<div id="job-content"></div>
+			</div>
+
+		</div>
+	</div>
+</section>
+<!-- end section -->
+
+<script type="text/javascript" src="js/careers-data.js"></script>
+<script type="text/javascript" src="js/careers-renderer.js"></script>

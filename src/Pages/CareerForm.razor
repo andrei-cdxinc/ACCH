@@ -1,0 +1,74 @@
+﻿@page "/career-form"
+@inject NavigationManager Navigation
+
+<!-- start page title -->
+<section class="p-0 ipad-top-space-margin page-title-big-typography cover-background md-background-position-left-center"
+		 style="background-image: url(images/demo-elder-care-title-bg.jpg);">
+	<div class="container">
+		<div class="row align-items-end justify-content-center h-200px">
+			<div class="col-auto text-center page-title-double-large"
+				 data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end page title -->
+
+<ApplicationForm SelectedPosition="@SelectedPosition" @rendermode="InteractiveServer" />
+
+<!-- careers form initialization -->
+<script type="text/javascript" src="js/careers-data.js"></script>
+<script type="text/javascript">
+	// Pre-fill form based on job parameter
+	document.addEventListener('DOMContentLoaded', function () {
+	const urlParams = new URLSearchParams(window.location.search);
+	const jobId = urlParams.get('job');
+
+	if (jobId && careersData && careersData.jobs) {
+	const job = careersData.jobs.find(j => j.id === jobId);
+
+	if (job) {
+	const heading = document.getElementById('applying-for-heading');
+	if (heading) {
+	heading.textContent = 'Applying For: ' + job.title;
+	}
+
+	// Pre-fill the Position Desired input and notify Blazor
+	const positionInput = document.getElementById('position-desired-input');
+	if (positionInput) {
+	positionInput.value = job.title;
+	// Dispatch input event so Blazor updates its bound value
+	positionInput.dispatchEvent(new Event('input', { bubbles: true }));
+	}
+	}
+	}
+	});
+</script>
+
+@code {
+	private string? SelectedPosition;
+
+	protected override void OnInitialized()
+	{
+		var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
+		if (Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query).TryGetValue("job", out var jobId))
+		{
+			// minimal mapping - keep in sync with careers-data.js
+			var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+			{
+				{ "rn", "Registered Nurse (RN)" },
+				{ "hca", "Home Health Aide (CNA)" },
+				{ "lvn", "Licensed Vocational Nurse (LVN)" },
+				{ "pt", "Physical Therapist (PT)" },
+				{ "ot", "Occupational Therapist (OT)" },
+				{ "pca", "Personal Care Attendant (PCA)" },
+				{ "clt", "Certified Lymphedema Therapist (OT/PT)" }
+			};
+
+			if (map.TryGetValue(jobId.ToString(), out var title))
+			{
+				SelectedPosition = title;
+			}
+		}
+	}
+}

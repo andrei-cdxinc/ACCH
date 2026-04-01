@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+            body {
+                font-family: 'Segoe UI', Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f7f9;
+            }
+
+            .container {
+                max-width: 700px;
+                margin: 20px auto;
+                background-color: #ffffff;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .header {
+                background-color: #4E0E6E;
+                padding: 30px;
+                text-align: center;
+            }
+
+                .header h1 {
+                    color: #ffffff;
+                    margin: 0;
+                    font-size: 28px;
+                    letter-spacing: 1px;
+                }
+
+            .accent-bar {
+                height: 4px;
+                background: linear-gradient(90deg, #b432b2, #df40dd);
+            }
+
+            .content {
+                padding: 40px 30px;
+                color: #333333;
+                line-height: 1.6;
+            }
+
+                .content h2 {
+                    color: #1a2b3c;
+                    font-size: 18px;
+                    margin-top: 0;
+                    border-bottom: 1px solid #eeeeee;
+                    padding-bottom: 10px;
+                }
+
+            .name-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+
+            .name-cell {
+                width: 50%;
+                vertical-align: top;
+            }
+
+            .field-group {
+                margin-bottom: 20px;
+            }
+
+            .label {
+                font-weight: bold;
+                color: #1a2b3c;
+                font-size: 12px;
+                text-transform: uppercase;
+                display: block;
+                margin-bottom: 4px;
+            }
+
+            .value {
+                background-color: #f9f9f9;
+                padding: 12px;
+                border-radius: 4px;
+                border-left: 4.5px solid #4E0E6E;
+            }
+
+            .footer {
+                background-color: #f4f7f9;
+                padding: 20px;
+                text-align: center;
+                color: #777777;
+                font-size: 12px;
+            }
+
+            .btn {
+                display: inline-block;
+                padding: 12px 30px;
+                background-color: #4E0E6E;
+                color: #ffffff;
+                text-decoration: none;
+                border-radius: 12px;
+                font-weight: bold;
+                margin-top: 20px;
+            }
+
+            .job-details-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>All Compassionate Care Job Application</h1>
+        </div>
+        <div class="accent-bar"></div>
+        <div class="content">
+            <h2>New Career Form Submission</h2>
+
+            <div class="field-group">
+                <span class="label">Position Desired</span>
+                <div class="value">@PositionDesired</div>
+            </div>
+
+            @* <table class="job-details-table">
+                <tr>
+                    <td class="name-cell" style="padding-right: 10px;">
+                        <span class="label">Pay Rate</span>
+                        <div class="value">@PayRate</div>
+                    </td>
+                    <td class="name-cell" style="padding-left: 10px;">
+                        <span class="label">County</span>
+                        <div class="value">@County</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="name-cell" style="padding-right: 10px; padding-top: 12px;">
+                        <span class="label">Shift</span>
+                        <div class="value">@Shift</div>
+                    </td>
+                    <td class="name-cell" style="padding-left: 10px; padding-top: 12px;">
+                        <span class="label">Status</span>
+                        <div class="value">@Status</div>
+                    </td>
+                </tr>
+            </table> *@
+
+            <h2>Personal Details</h2>
+
+            <table class="name-table">
+                <tr>
+                    <td class="name-cell" style="padding-right: 10px;">
+                        <span class="label">First Name</span>
+                        <div class="value">@FirstName</div>
+                    </td>
+                    <td class="name-cell" style="padding-left: 10px;">
+                        <span class="label">Last Name</span>
+                        <div class="value">@LastName</div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="field-group">
+                <span class="label">Date of Birth</span>
+                <div class="value">@DateOfBirth</div>
+            </div>
+
+            <div class="field-group">
+                <span class="label">Email Address</span>
+                <div class="value">@Email</div>
+            </div>
+
+            <div class="field-group">
+                <span class="label">Phone Number</span>
+                <div class="value">@Phone</div>
+            </div>
+
+            <div class="field-group">
+                <span class="label">Address</span>
+                <div class="value">@((MarkupString)CombinedAddressHtml)</div>
+            </div>
+
+
+            @if (!string.IsNullOrWhiteSpace(Comments))
+            {
+                <div class="field-group">
+                    <span class="label">Comments</span>
+                    <div class="value">@Comments</div>
+                </div>
+            }
+
+            <a href="mailto:@Email" class="btn" style="color: #ffffff">Reply to Application</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; @DateTime.Now.Year All Compassionate Care | Compliance-Driven Support</p>
+            <p>This is an automated notification from your website All Compassionate Care.</p>
+        </div>
+    </div>
+</body>
+</html>
+
+@code {
+    [Parameter] public string FirstName { get; set; } = string.Empty;
+    [Parameter] public string LastName { get; set; } = string.Empty;
+    [Parameter] public DateOnly DateOfBirth { get; set; }
+    [Parameter] public string Email { get; set; } = string.Empty;
+    [Parameter] public string Phone { get; set; } = string.Empty;
+    [Parameter] public string Address { get; set; } = string.Empty;
+    [Parameter] public string City { get; set; } = string.Empty;
+    [Parameter] public string State { get; set; } = string.Empty;
+    [Parameter] public string ZipCode { get; set; } = string.Empty;
+    [Parameter] public string PositionDesired { get; set; } = string.Empty;
+    [Parameter] public string Comments { get; set; } = string.Empty;
+    [Parameter] public string PayRate { get; set; } = string.Empty;
+    [Parameter] public string County { get; set; } = string.Empty;
+    [Parameter] public string Shift { get; set; } = string.Empty;
+    [Parameter] public string Status { get; set; } = string.Empty;
+
+    private string CombinedAddressHtml
+    {
+        get
+        {
+            var street = string.IsNullOrWhiteSpace(Address) ? null : Address.Trim();
+            var city = string.IsNullOrWhiteSpace(City) ? null : City.Trim();
+            var state = string.IsNullOrWhiteSpace(State) ? null : State.Trim();
+            var zip = string.IsNullOrWhiteSpace(ZipCode) ? null : ZipCode.Trim();
+
+            string cityStateZip = null;
+            if (!string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(state) || !string.IsNullOrEmpty(zip))
+            {
+                if (!string.IsNullOrEmpty(city) && !string.IsNullOrEmpty(state))
+                {
+                    cityStateZip = city + ", " + string.Join(" ", new[] { state, zip }.Where(s => !string.IsNullOrEmpty(s)));
+                }
+                else
+                {
+                    cityStateZip = string.Join(" ", new[] { city, state, zip }.Where(s => !string.IsNullOrEmpty(s)));
+                }
+            }
+
+            var parts = new List<string>();
+            
+            if (!string.IsNullOrEmpty(street)) parts.Add(street);
+            if (!string.IsNullOrEmpty(cityStateZip)) parts.Add(cityStateZip);
+            return parts.Count > 0 ? string.Join("<br/>", parts) : string.Empty;
+        }
+    }
+}
